@@ -1,0 +1,109 @@
+<html>
+<head>
+	<title>dana.rok</title>
+
+<script language="javascript">
+var delay=10; //시간설정
+var correctAnswers=new Array("b","c","b","a","d");  //정답
+
+var q_num=1;
+var timer;
+var layer;
+var clock=delay;
+var score=0;
+
+function show_question(){
+	if (layer=eval("document.all.question"+q_num)){
+		layer.style.display="inline";
+		document.all.timeLeft.innerHTML=clock;
+		hide_question();
+	} else {
+		document.all.timeLeft.innerHTML=0;
+		document.all.quizScore.innerHTML="당신은 "+(q_num-1)+"문제중 "+score+"개를 맞췄습니다.";
+		document.all.quizScore.style.display="inline";
+	}
+}
+
+function hide_question(){
+	if (clock>0) {
+		document.all.timeLeft.innerHTML=clock;
+		clock--;
+		timer=setTimeout("hide_question()",1000);
+	} else {
+		clearTimeout(timer);
+		document.all.answerBoard.innerHTML=" ";
+		clock=delay;
+		layer.style.display="none";
+		q_num++;
+		show_question();
+	}
+}
+
+function check_answer(answer){
+	if (correctAnswers[q_num-1]==answer){
+		score++;
+		document.all.answerBoard.innerHTML="<font color=blue><b>정답입니다.</b></font>";
+	} else {
+		document.all.answerBoard.innerHTML="<font color=red><b>땡! 틀렸습니다.</b></font>";
+	}
+	clock=0;
+	clearTimeout(timer);
+	timer=setTimeout("hide_question()",700);
+}
+
+window.onload=show_question;
+</script>
+</head>
+
+<body>
+
+제한시간 : <B><span id="timeLeft"></span></B> 초<br>
+<br>
+<div id="answerBoard"> </div>
+<br>
+
+<div id="question1" style="display:none">
+	<b>1. 연맹 건물 건축으로 하루에 획득 가능한 최대 개인포인트는 ?</b><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')">a) 10000</a><br>
+	<a href="javascript:void(0)" onclick="check_answer('b')">b) 20000</a><br>
+	<a href="javascript:void(0)" onclick="check_answer('c')">c) 30000</a><br>
+	<a href="javascript:void(0)" onclick="check_answer('d')">d) 제한없음</a><br>
+</div>
+
+<div id="question2" style="display:none">
+<b>2. 해넘이 계곡에서 적용되지 않는 버프는 ?</b><br>
+<a href="javascript:void(0)" onclick="check_answer('a')">a) 사령관 특성 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('b')">b) 사령관 장비 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('c')">c) 부적 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('d')">d) VIP 부대확장 </a><br>
+</div>
+
+<div id="question3" style="display:none">
+<b>3. 전투력 3232만 캐릭터의 왕국 변경시 필요한 여권 페이지 개수는 ?</b><br>
+<a href="javascript:void(0)" onclick="check_answer('a')">a) 6개 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('b')">b) 9개 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('c')">c) 12개 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('d')">d) 15개 </a><br>
+</div>
+
+<div id="question4" style="display:none">
+<b>4. 사령관 이름 표기로 올바른 것은 ?  </b><br>
+<a href="javascript:void(0)" onclick="check_answer('a')">a) 구스노키 마사시게 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('b')">b) 부티카 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('c')">c) 벨리사이우스 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('d')">d) 가리우스 마이우스 </a><br>
+</div>
+
+<div id="question5" style="display:none">
+<b>5. 레벨 6 채벌장의 최대 저장량은 ?</b><br>
+<a href="javascript:void(0)" onclick="check_answer('a')">a) 756,000 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('b')">b) 850,500 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('c')">c) 945,000 </a><br>
+<a href="javascript:void(0)" onclick="check_answer('d')">d) 1,008,000 </a><br>
+</div>
+
+<div id="quizScore" style="display:none">
+</div>
+
+</body>
+</html>
